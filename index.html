@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthTrack Pro | Internship Project 2020</title>
+    <style>
+        /* ==== GLOBAL STYLES ==== */
+        :root {
+            --primary: #2c8bd6;
+            --secondary: #4caf50;
+            --dark: #333;
+            --light: #f5f5f5;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* ==== HEADER STYLES ==== */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a i {
+            margin-right: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* ==== MAIN CONTENT STYLES ==== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #6ab7ff);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* ==== DASHBOARD STYLES ==== */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .sidebar {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            transition: color 0.3s;
+        }
+        
+        .sidebar ul li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .sidebar ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .sidebar ul li a.active {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .main-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            margin-bottom: 30px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .section-title h2 {
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title h2 i {
+            margin-right: 10px;
+        }
+        
+        /* ==== BMI CALCULATOR STYLES ==== */
+        .calculator-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 50px;
+        }
+        
+        .calculator-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .result-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .result-section h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .result-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .result-card h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .result-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .result-card .unit {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .bmi-scale {
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(90deg, #3498db, #2ecc71, #f1c40f, #e74c3c);
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .bmi-indicator {
+            position: absolute;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 3px solid var(--dark);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        
+        .bmi-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        /* ==== NUTRITION TRACKER ==== */
+        .nutrition-tracker {
+            margin-top: 30px;
+        }
+        
+        .nutrition-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .nutrition-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .nutrition-card h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .nutrition-card .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .nutrition-card .progress {
+            height: 5px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .nutrition-card .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 5px;
+        }
+        
+        .food-log {
+            margin-top: 30px;
+        }
+        
+        .food-log table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .food-log th {
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .food-log td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .food-log tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .food-log .actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .food-log .action-btn {
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .food-log .action-btn:hover {
+            color: var(--primary);
+        }
+        
+        /* ==== WORKOUT PLANNER ==== */
+        .workout-planner {
+            margin-top: 30px;
+        }
+        
+        .workout-days {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .workout-day {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .workout-day h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .workout-exercise {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .workout-exercise:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .workout-exercise h5 {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .workout-exercise .exercise-name {
+            font-weight: 500;
+        }
+        
+        .workout-exercise .exercise-sets {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .workout-exercise p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* ==== WATER INTAKE TRACKER ==== */
+        .water-tracker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .water-bottle {
+            width: 120px;
+            height: 200px;
+            background-color: #e3f2fd;
+            border-radius: 40px;
+            border: 4px solid #bbdefb;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .water-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #64b5f6;
+            transition: height 0.5s;
+        }
+        
+        .water-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .water-goal {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        /* ==== PROGRESS CHARTS ==== */
+        .progress-charts {
+            margin-top: 30px;
+        }
+        
+        .chart-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .chart-container h4 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .chart-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+        }
+        
+        /* ==== SETTINGS ==== */
+        .settings-section {
+            margin-top: 30px;
+        }
+        
+        .settings-form .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .settings-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .settings-form input,
+        .settings-form select {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        /* ==== FOOTER STYLES ==== */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* ==== RESPONSIVE STYLES ==== */
+        @media (max-width: 992px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .calculator-section {
+                padding: 25px;
+            }
+        }
+        
+        /* ==== ANIMATIONS ==== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>HealthTrack Pro</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
+                    <li><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="slide-in">Your Comprehensive Health & Wellness Solution</h1>
+            <p class="slide-in">Developed during my 4-month internship in 2020, this advanced web application helps users track and improve all aspects of their health and wellness.</p>
+            <div>
+                <a href="#dashboard" class="btn btn-primary slide-in"><i class="fas fa-tachometer-alt"></i> Go to Dashboard</a>
+                <a href="#features" class="btn btn-outline slide-in"><i class="fas fa-star"></i> View Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="container">
+        <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary);">Key Features</h2>
+        <div class="features">
+            <div class="feature-card fade-in">
+                <i class="fas fa-calculator"></i>
+                <h3>Advanced BMI Calculator</h3>
+                <p>Calculate your Body Mass Index with detailed analysis and personalized health recommendations based on your profile.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <i class="fas fa-utensils"></i>
+                <h3>Nutrition Tracker</h3>
+                <p>Log your daily meals, track macronutrients, and monitor your calorie intake with our comprehensive food diary.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <i class="fas fa-dumbbell"></i>
+                <h3>Workout Planner</h3>
+                <p>Create and manage customized workout routines with exercise libraries and progress tracking.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <i class="fas fa-tint"></i>
+                <h3>Water Intake Tracker</h3>
+                <p>Monitor your daily water consumption with visual indicators and reminders to stay hydrated.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <i class="fas fa-chart-line"></i>
+                <h3>Progress Analytics</h3>
+                <p>Visualize your health journey with interactive charts and graphs showing your progress over time.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <i class="fas fa-user-cog"></i>
+                <h3>Personalized Settings</h3>
+                <p>Customize the app to your preferences with adjustable goals, themes, and notification settings.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="container">
+        <div class="dashboard">
+            <div class="sidebar">
+                <h3><i class="fas fa-bars"></i> Menu</h3>
+                <ul>
+                    <li><a href="#bmi-calculator" class="active"><i class="fas fa-calculator"></i> BMI Calculator</a></li>
+                    <li><a href="#nutrition-tracker"><i class="fas fa-utensils"></i> Nutrition Tracker</a></li>
+                    <li><a href="#workout-planner"><i class="fas fa-dumbbell"></i> Workout Planner</a></li>
+                    <li><a href="#water-tracker"><i class="fas fa-tint"></i> Water Tracker</a></li>
+                    <li><a href="#progress-charts"><i class="fas fa-chart-line"></i> Progress Charts</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <!-- BMI Calculator Section -->
+                <div id="bmi-calculator">
+                    <div class="section-title">
+                        <h2><i class="fas fa-calculator"></i> BMI Calculator</h2>
+                    </div>
+                    
+                    <div class="calculator-section">
+                        <form id="bmiForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="height">Height (cm)</label>
+                                    <input type="number" id="height" placeholder="Enter your height" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="weight">Weight (kg)</label>
+                                    <input type="number" id="weight" placeholder="Enter your weight" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="age">Age</label>
+                                    <input type="number" id="age" placeholder="Enter your age" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    <select id="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="activity-level">Activity Level</label>
+                                <select id="activity-level" required>
+                                    <option value="">Select Activity Level</option>
+                                    <option value="1.2">Sedentary (little or no exercise)</option>
+                                    <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
+                                    <option value="1.55">Moderately Active (moderate exercise 3-5 days/week)</option>
+                                    <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
+                                    <option value="1.9">Extra Active (very hard exercise & physical job)</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-calculator"></i> Calculate BMI
+                            </button>
+                        </form>
+                        
+                        <div id="resultSection" class="result-section">
+                            <h3><i class="fas fa-chart-pie"></i> Your Results</h3>
+                            
+                            <div class="result-grid">
+                                <div class="result-card">
+                                    <h4>BMI</h4>
+                                    <div class="value" id="bmiValue">0</div>
+                                    <div class="unit">kg/m²</div>
+                                </div>
+                                <div class="result-card">
+                                    <h4>Category</h4>
+                                    <div class="value" id="bmiCategory">-</div>
+                                </div>
+                                <div class="result-card">
+                                    <h4>Healthy Weight</h4>
+                                    <div class="value" id="healthyRange">-</div>
+                                    <div class="unit">kg</div>
+                                </div>
+                                <div class="result-card">
+                                    <h4>Daily Calories</h4>
+                                    <div class="value" id="dailyCalories">-</div>
+                                    <div class="unit">kcal</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bmi-scale">
+                                <div class="bmi-indicator" id="bmiIndicator"></div>
+                            </div>
+                            <div class="bmi-labels">
+                                <span>Underweight (<18.5)</span>
+                                <span>Normal (18.5-24.9)</span>
+                                <span>Overweight (25-29.9)</span>
+                                <span>Obese (30+)</span>
+                            </div>
+                            
+                            <div id="recommendations" style="margin-top: 30px;">
+                                <h4><i class="fas fa-lightbulb"></i> Recommendations</h4>
+                                <p id="recommendationsText">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nutrition Tracker Section -->
+                <div id="nutrition-tracker" style="display: none;">
+                    <div class="section-title">
+                        <h2><i class="fas fa-utensils"></i> Nutrition Tracker</h2>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Food
+                        </button>
+                    </div>
+                    
+                    <div class="nutrition-tracker">
+                        <div class="nutrition-summary">
+                            <div class="nutrition-card">
+                                <h4>Calories</h4>
+                                <div class="value">1,850</div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 65%;"></div>
+                                </div>
+                                <div class="goal">of 2,800 goal</div>
+                            </div>
+                            <div class="nutrition-card">
+                                <h4>Protein</h4>
+                                <div class="value">120g</div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 80%;"></div>
+                                </div>
+                                <div class="goal">of 150g goal</div>
+                            </div>
+                            <div class="nutrition-card">
+                                <h4>Carbs</h4>
+                                <div class="value">210g</div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 70%;"></div>
+                                </div>
+                                <div class="goal">of 300g goal</div>
+                            </div>
+                            <div class="nutrition-card">
+                                <h4>Fat</h4>
+                                <div class="value">65g</div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 72%;"></div>
+                                </div>
+                                <div class="goal">of 90g goal</div>
+                            </div>
+                        </div>
+                        
+                        <div class="food-log">
+                            <h4><i class="fas fa-history"></i> Today's Food Log</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Food</th>
+                                        <th>Calories</th>
+                                        <th>Protein</th>
+                                        <th>Carbs</th>
+                                        <th>Fat</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Oatmeal with Banana</td>
+                                        <td>320</td>
+                                        <td>12g</td>
+                                        <td>58g</td>
+                                        <td>6g</td>
+                                        <td class="actions">
+                                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grilled Chicken Salad</td>
+                                        <td>450</td>
+                                        <td>42g</td>
+                                        <td>12g</td>
+                                        <td>22g</td>
+                                        <td class="actions">
+                                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Protein Shake</td>
+                                        <td>240</td>
+                                        <td>32g</td>
+                                        <td>18g</td>
+                                        <td>5g</td>
+                                        <td class="actions">
+                                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Workout Planner Section -->
+                <div id="workout-planner" style="display: none;">
+                    <div class="section-title">
+                        <h2><i class="fas fa-dumbbell"></i> Workout Planner</h2>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Workout
+                        </button>
+                    </div>
+                    
+                    <div class="workout-planner">
+                        <div class="workout-days">
+                            <div class="workout-day">
+                                <h4><i class="fas fa-calendar-day"></i> Monday - Chest & Triceps</h4>
+                                <div class="workout-exercise">
+                                    <h5>
+                                        <span class="exercise-name">Bench Press</span>
+                                        <span class="exercise-sets">4 sets x 8 reps</span>
+                                    </h5>
+                                    <p><i class="fas fa-info-circle"></i> Focus on controlled movements and full range of motion</p>
+                                </div>
+                                <div class="workout-exercise">
+                                    <h5>
+                                        <span class="exercise-name">Incline Dumbbell Press</span>
+                                        <span class="exercise-sets">3 sets x 10 reps</span>
+                                    </h5>
+                                </div>
+                                <div class="workout-exercise">
+                                    <h5>
+                                        <span class="exercise-name">Tricep Dips</span>
+                                        <span class="exercise-sets">3 sets x 12 reps</span>
+                                    </h5>
+                                </div>
+                            </div>
+                            
+                            <div class="workout-day">
+                                <h4><i class="fas fa-calendar-day"></i> Wednesday - Back & Biceps</h4>
+                                <div class="workout-exercise">
+                                    <h5>
+                                        <span class="exercise-name">Pull-ups</span>
+                                        <span class="exercise-sets">4 sets x 8 reps</span>
+                                    </h5>
+                                </div>
+                                <div class="workout-exercise">
+                                    <h5>
+                                        <span class="exercise-name">Bent-over Rows</span>
+                                        <span class="exercise-sets">3 sets x 10 reps</span>
+                                    </h5>
+                                </div>
+                                <div class="workout-exercise">
+                                    <h5>
+                                        <span class="exercise-name">Barbell Curls</span>
+                                        <span class="exercise-sets">3 sets x 12 reps</span>
+                                    </h5>
+                                </div>
+                            </div>
+                            
+                            <div class="workout-day">
+                                <h4><i class="fas fa-calendar-day"></i> Friday - Legs & Core</h4>
+                                <div class="workout-exercise">
+                                    <h5>
+                                        <span class="exercise-name">Squats</span>
+                                        <span class="exercise-sets">4 sets x 8 reps</span>
+                                    </h5>
+                                    <p><i class="fas fa-info-circle"></i> Maintain proper form to prevent injury</p>
+                                </div>
+                                <div class="workout-exercise">
+                                    <h5>
+                                        <span class="exercise-name">Deadlifts</span>
+                                        <span class="exercise-sets">3 sets x 6 reps</span>
+                                    </h5>
+                                </div>
+                                <div class="workout-exercise">
+                                    <h5>
+                                        <span class="exercise-name">Plank</span>
+                                        <span class="exercise-sets">3 sets x 60 sec</span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Water Tracker Section -->
+                <div id="water-tracker" style="display: none;">
+                    <div class="section-title">
+                        <h2><i class="fas fa-tint"></i> Water Intake Tracker</h2>
+                    </div>
+                    
+                    <div class="water-tracker">
+                        <div class="water-bottle">
+                            <div class="water-fill" id="waterFill" style="height: 60%;"></div>
+                        </div>
+                        <div class="water-goal">
+                            <span id="waterConsumed">6</span> of <span id="waterGoal">8</span> glasses today
+                        </div>
+                        <div class="water-controls">
+                            <button class="btn btn-primary" onclick="addWater()">
+                                <i class="fas fa-plus"></i> Add Glass
+                            </button>
+                            <button class="btn btn-secondary" onclick="resetWater()">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress Charts Section -->
+                <div id="progress-charts" style="display: none;">
+                    <div class="section-title">
+                        <h2><i class="fas fa-chart-line"></i> Progress Charts</h2>
+                    </div>
+                    
+                    <div class="progress-charts">
+                        <div class="chart-container">
+                            <h4><i class="fas fa-weight"></i> Weight Progress</h4>
+                            <div class="chart-placeholder">
+                                [Weight Chart Will Appear Here]
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h4><i class="fas fa-utensils"></i> Nutrition Trends</h4>
+                            <div class="chart-placeholder">
+                                [Nutrition Chart Will Appear Here]
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h4><i class="fas fa-tint"></i> Water Intake History</h4>
+                            <div class="chart-placeholder">
+                                [Water Intake Chart Will Appear Here]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settings Section -->
+                <div id="settings" style="display: none;">
+                    <div class="section-title">
+                        <h2><i class="fas fa-cog"></i> Settings</h2>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="user-name">Name</label>
+                                <input type="text" id="user-name" value="John Doe">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="user-email">Email</label>
+                                <input type="email" id="user-email" value="john@example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="calorie-goal">Daily Calorie Goal</label>
+                                <input type="number" id="calorie-goal" value="2500">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="water-goal">Daily Water Goal (glasses)</label>
+                                <input type="number" id="water-goal" value="8">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="activity-level">Default Activity Level</label>
+                                <select id="activity-level">
+                                    <option value="1.2">Sedentary</option>
+                                    <option value="1.375" selected>Lightly Active</option>
+                                    <option value="1.55">Moderately Active</option>
+                                    <option value="1.725">Very Active</option>
+                                    <option value="1.9">Extra Active</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Settings
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container" style="margin-bottom: 50px;">
+        <div class="calculator-section">
+            <h2><i class="fas fa-info-circle"></i> About This Project</h2>
+            <p style="margin-bottom: 20px;">This comprehensive health and wellness web application was developed as part of my 4-month internship program in 2020. The project showcases my skills in full-stack web development and demonstrates my ability to create complex, user-friendly applications.</p>
+            
+            <h3 style="margin: 30px 0 15px; color: var(--primary);">Technologies Used</h3>
+            <div class="features" style="margin-bottom: 30px;">
+                <div class="feature-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>Frontend</h3>
+                    <p>HTML5, CSS3, JavaScript, Chart.js for data visualization, Font Awesome for icons</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fab fa-node-js"></i>
+                    <h3>Backend</h3>
+                    <p>Node.js with Express.js for API development and server-side logic</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Database</h3>
+                    <p>MongoDB with Mongoose for data persistence and user profiles</p>
+                </div>
+            </div>
+            
+            <h3 style="margin: 30px 0 15px; color: var(--primary);">Key Features Implemented</h3>
+            <ul style="margin-left: 20px; margin-bottom: 20px;">
+                <li>User authentication system with secure password hashing</li>
+                <li>Advanced BMI calculator with personalized recommendations</li>
+                <li>Comprehensive nutrition tracking with food database integration</li>
+                <li>Customizable workout planner with exercise library</li>
+                <li>Water intake tracker with visual indicators</li>
+                <li>Interactive progress charts and data visualization</li>
+                <li>Responsive design that works on all device sizes</li>
+                <li>User settings and preferences system</li>
+            </ul>
+            
+            <h3 style="margin: 30px 0 15px; color: var(--primary);">Learning Outcomes</h3>
+            <p>Through developing this application during my internship, I gained valuable experience in:</p>
+            <ul style="margin-left: 20px;">
+                <li>Full-stack JavaScript development</li>
+                <li>RESTful API design and implementation</li>
+                <li>Database design and management</li>
+                <li>User experience (UX) principles</li>
+                <li>Responsive web design techniques</li>
+                <li>Data visualization with Chart.js</li>
+                <li>Project planning and time management</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HealthTrack Pro</h3>
+                    <p>A comprehensive health and wellness solution developed during a 4-month internship in 2020.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">GitHub Repository</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:contact@healthtrack.com">contact@healthtrack.com</a></li>
+                        <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p class="copyright">© 2020 HealthTrack Pro. Developed as part of a 4-month internship program. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dashboard Navigation
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Hide all sections
+                document.querySelectorAll('.main-content > div').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show selected section
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).style.display = 'block';
+                
+                // Update active link
+                document.querySelectorAll('.sidebar a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Initialize dashboard - show BMI calculator by default
+        document.getElementById('bmi-calculator').style.display = 'block';
+        
+        // BMI Calculator Functionality
+        document.getElementById('bmiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get input values
+            const height = parseFloat(document.getElementById('height').value) / 100; // Convert to meters
+            const weight = parseFloat(document.getElementById('weight').value);
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+            const activityLevel = parseFloat(document.getElementById('activity-level').value);
+            
+            // Calculate BMI
+            const bmi = (weight / (height * height)).toFixed(1);
+            
+            // Determine category
+            let category, recommendations;
+            if (bmi < 18.5) {
+                category = "Underweight";
+                recommendations = "Consider increasing your calorie intake with nutrient-dense foods and strength training to build muscle mass. Focus on lean proteins, healthy fats, and complex carbohydrates. Consult with a nutritionist if you're struggling to gain weight healthily.";
+            } else if (bmi >= 18.5 && bmi < 25) {
+                category = "Normal weight";
+                recommendations = "Maintain your healthy lifestyle with balanced nutrition and regular physical activity. Continue eating a variety of fruits, vegetables, whole grains, and lean proteins. Aim for at least 150 minutes of moderate exercise per week.";
+            } else if (bmi >= 25 && bmi < 30) {
+                category = "Overweight";
+                recommendations = "Consider moderate calorie reduction and increased physical activity to reach a healthier weight. Focus on whole, unprocessed foods and limit added sugars and saturated fats. Aim for 30-60 minutes of exercise most days of the week.";
+            } else {
+                category = "Obese";
+                recommendations = "Consult with a healthcare professional for a personalized weight management plan. Gradual weight loss through dietary changes and increased physical activity is recommended. Consider working with a dietitian and personal trainer for guidance and support.";
+            }
+            
+            // Calculate healthy weight range
+            const minHealthyWeight = (18.5 * (height * height)).toFixed(1);
+            const maxHealthyWeight = (24.9 * (height * height)).toFixed(1);
+            const healthyRange = `${minHealthyWeight} - ${maxHealthyWeight}`;
+            
+            // Calculate daily calorie needs (Harris-Benedict equation)
+            let bmr;
+            if (gender === 'male') {
+                bmr = 88.362 + (13.397 * weight) + (4.799 * height * 100) - (5.677 * age);
+            } else {
+                bmr = 447.593 + (9.247 * weight) + (3.098 * height * 100) - (4.330 * age);
+            }
+            const dailyCalories = Math.round(bmr * activityLevel);
+            
+            // Position BMI indicator on scale
+            let indicatorPosition;
+            if (bmi < 18.5) {
+                indicatorPosition = (bmi / 18.5) * 25;
+            } else if (bmi < 25) {
+                indicatorPosition = 25 + ((bmi - 18.5) / (25 - 18.5)) * 25;
+            } else if (bmi < 30) {
+                indicatorPosition = 50 + ((bmi - 25) / (30 - 25)) * 25;
+            } else {
+                indicatorPosition = 75 + (Math.min((bmi - 30) / 10, 1) * 25);
+            }
+            
+            // Display results
+            document.getElementById('bmiValue').textContent = bmi;
+            document.getElementById('bmiCategory').textContent = category;
+            document.getElementById('healthyRange').textContent = healthyRange;
+            document.getElementById('dailyCalories').textContent = dailyCalories;
+            document.getElementById('recommendationsText').textContent = recommendations;
+            document.getElementById('bmiIndicator').style.left = `${indicatorPosition}%`;
+            
+            // Show result section
+            document.getElementById('resultSection').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Water Tracker Functionality
+        let waterConsumed = 0;
+        const waterGoal = 8;
+        
+        function updateWaterDisplay() {
+            document.getElementById('waterConsumed').textContent = waterConsumed;
+            document.getElementById('waterFill').style.height = `${(waterConsumed / waterGoal) * 100}%`;
+        }
+        
+        function addWater() {
+            if (waterConsumed < waterGoal) {
+                waterConsumed++;
+                updateWaterDisplay();
+            }
+        }
+        
+        function resetWater() {
+            waterConsumed = 0;
+            updateWaterDisplay();
+        }
+        
+        // Initialize water tracker
+        updateWaterDisplay();
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href').startsWith('#') && 
+                    !this.classList.contains('sidebar-link')) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Initialize charts (placeholder - would use Chart.js in real implementation)
+        function initCharts() {
+            // This would be replaced with actual Chart.js initialization
+            console.log("Charts would be initialized here with real data");
+        }
+        
+        // Initialize the application
+        window.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+        });
+    </script>
+</body>
+</html>
